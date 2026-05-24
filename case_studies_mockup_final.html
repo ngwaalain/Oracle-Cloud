@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selected Engagements — Mockup v2</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<style>
+  :root {
+    --bg-page: #FAF9F5;
+    --bg-surface: #F1EFE8;
+    --bg-card: #FFFFFF;
+    --bg-muted: #F5F4EE;
+    --text-primary: #1A1A1A;
+    --text-secondary: #5F5E5A;
+    --text-tertiary: #888780;
+
+    /* Per-project accent palette */
+    --c-baseline-bg: #EEF4FB;
+    --c-baseline-ink: #1E4E8C;
+    --c-baseline-border: #4A7FBD;
+
+    --c-data-bg: #E4F3EE;
+    --c-data-ink: #0F6E56;
+    --c-data-border: #2DA17F;
+
+    --c-cspm-bg: #FAEEDA;
+    --c-cspm-ink: #854F0B;
+    --c-cspm-border: #BA7517;
+
+    --c-edge-bg: #F0EDF9;
+    --c-edge-ink: #3C3489;
+    --c-edge-border: #7F77DD;
+
+    --c-network-bg: #FBEAF0;
+    --c-network-ink: #993556;
+    --c-network-border: #D4537E;
+
+    --text-danger: #A32D2D;
+    --text-success: #3B6D11;
+    --border-light: rgba(0, 0, 0, 0.10);
+    --border-medium: rgba(0, 0, 0, 0.18);
+
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-page);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 2rem 1rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .header {
+    margin-bottom: 1.5rem;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 6px;
+  }
+
+  .header h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .header p.subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .grid-shell {
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+  }
+
+  /* === FEATURED TILE === */
+  .featured {
+    background: var(--bg-card);
+    border: 2px solid var(--c-baseline-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .featured::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--c-baseline-border);
+  }
+  .featured:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(30, 78, 140, 0.12);
+  }
+
+  .featured-badge {
+    display: inline-block;
+    background: var(--c-baseline-bg);
+    color: var(--c-baseline-ink);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .featured-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .featured-title-row i {
+    font-size: 24px;
+    color: var(--c-baseline-ink);
+  }
+
+  .featured-title-row p {
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .featured-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0 0 16px;
+    line-height: 1.55;
+    max-width: 90%;
+  }
+
+  /* Highlight strip — qualitative anchors for featured tile */
+  .anchor-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .anchor {
+    background: var(--c-baseline-bg);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    border-left: 3px solid var(--c-baseline-border);
+  }
+
+  .anchor .label {
+    font-size: 10px;
+    color: var(--c-baseline-ink);
+    margin: 0 0 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .anchor .value {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .featured-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 0.5px solid var(--border-light);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .stack-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .stack-tag {
+    font-size: 10px;
+    padding: 3px 9px;
+    background: var(--bg-muted);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+  }
+
+  .cta {
+    font-size: 13px;
+    color: var(--c-baseline-ink);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .cta i { font-size: 14px; }
+
+  /* === SUPPORTING CARD GRID === */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.3rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--text-secondary));
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .card[data-theme="data"] { --card-accent: var(--c-data-border); }
+  .card[data-theme="cspm"] { --card-accent: var(--c-cspm-border); }
+  .card[data-theme="edge"] { --card-accent: var(--c-edge-border); }
+  .card[data-theme="network"] { --card-accent: var(--c-network-border); }
+
+  .card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .card-title-row i {
+    font-size: 20px;
+  }
+
+  .card[data-theme="data"] .card-title-row i { color: var(--c-data-ink); }
+  .card[data-theme="cspm"] .card-title-row i { color: var(--c-cspm-ink); }
+  .card[data-theme="edge"] .card-title-row i { color: var(--c-edge-ink); }
+  .card[data-theme="network"] .card-title-row i { color: var(--c-network-ink); }
+
+  .card-title-row p {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .spotlight-pill {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: var(--radius-md);
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    background: var(--c-data-bg);
+    color: var(--c-data-ink);
+  }
+
+  .card-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin: 0 0 14px;
+    line-height: 1.55;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 0.5px solid var(--border-light);
+  }
+
+  .card-footer .hint {
+    font-size: 11px;
+    color: var(--text-tertiary);
+  }
+
+  .card-footer i {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .card-stack {
+    margin-bottom: 12px;
+  }
+
+  /* === MODAL / DETAIL VIEW === */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 20, 20, 0.55);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 100;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+  }
+
+  .modal-backdrop.active {
+    display: flex;
+  }
+
+  .modal {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    max-width: 780px;
+    width: 100%;
+    padding: 2rem 2.25rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    border-top: 6px solid var(--modal-accent, var(--c-baseline-border));
+    margin: auto;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--bg-muted);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+  }
+  .modal-close:hover { background: var(--bg-surface); }
+  .modal-close i { font-size: 18px; }
+
+  .breadcrumb {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin: 0 0 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .modal h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .modal .meta-line {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0 0 1.5rem;
+  }
+
+  .modal-anchors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-anchor {
+    background: var(--modal-anchor-bg, var(--c-baseline-bg));
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    border-left: 3px solid var(--modal-accent, var(--c-baseline-border));
+  }
+
+  .modal-anchor .label {
+    font-size: 10px;
+    color: var(--modal-ink, var(--c-baseline-ink));
+    margin: 0 0 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .modal-anchor .value {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+
+  .modal-anchor .value.sub {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .modal-anchor .value.danger {
+    color: var(--text-danger);
+  }
+
+  .modal-section {
+    margin-bottom: 1.25rem;
+  }
+
+  .modal-section .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+
+  .modal-section p {
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  .outcome-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .outcome-item i {
+    font-size: 14px;
+    color: var(--text-success);
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .outcome-item p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .modal-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding-top: 1.25rem;
+    border-top: 0.5px solid var(--border-light);
+    margin-top: 1.25rem;
+  }
+
+  .modal-footer-grid .col p.section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+
+  .service-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 4px 10px;
+    background: var(--modal-anchor-bg, var(--c-baseline-bg));
+    color: var(--modal-ink, var(--c-baseline-ink));
+    border-radius: var(--radius-md);
+    margin: 0 4px 4px 0;
+  }
+
+  /* Mobile */
+  @media (max-width: 720px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .featured { padding: 1.25rem; }
+    .featured-desc { max-width: 100%; }
+    .anchor-strip { grid-template-columns: 1fr; gap: 8px; }
+    .modal-anchors { grid-template-columns: 1fr; }
+    .modal { padding: 1.5rem 1.25rem; }
+    .modal-footer-grid { grid-template-columns: 1fr; }
+    .featured-footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <p class="eyebrow">Visual proposal · interactive prototype</p>
+    <h1>Selected engagements</h1>
+    <p class="subtitle">Proposed layout for the case study section. Click any card to preview the detail view.</p>
+  </div>
+
+  <div class="grid-shell">
+
+    <!-- FEATURED TILE: AWS Security Baseline Framework -->
+    <div class="featured" data-modal="baseline">
+      <div class="featured-badge">Featured engagement</div>
+      <div class="featured-title-row">
+        <i class="ti ti-building-fortress" aria-hidden="true"></i>
+        <p>Enterprise AWS security assessment &amp; control baseline</p>
+      </div>
+      <p class="featured-desc">Full-scope assessment that helped move a global enterprise from tool-based security coverage to a structured operating model — with guardrails, baseline controls, detection ownership, and a maturity roadmap.</p>
+
+      <div class="anchor-strip">
+        <div class="anchor">
+          <p class="label">Scope</p>
+          <p class="value">Multi-account AWS estate</p>
+        </div>
+        <div class="anchor">
+          <p class="label">Framework</p>
+          <p class="value">CIS · NIST · CSA CCM</p>
+        </div>
+        <div class="anchor">
+          <p class="label">Deliverable</p>
+          <p class="value">Maturity roadmap</p>
+        </div>
+      </div>
+
+      <div class="featured-footer">
+        <div class="stack-row">
+          <span class="stack-tag">Control Tower</span>
+          <span class="stack-tag">SCPs</span>
+          <span class="stack-tag">Security Hub</span>
+          <span class="stack-tag">GuardDuty</span>
+          <span class="stack-tag">Terraform</span>
+        </div>
+        <span class="cta">Read case study <i class="ti ti-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </div>
+
+    <!-- 2x2 SUPPORTING GRID -->
+    <div class="card-grid">
+
+      <!-- Card: Data Security (Spotlight) -->
+      <div class="card" data-theme="data" data-modal="data">
+        <div class="card-title-row">
+          <i class="ti ti-shield-check" aria-hidden="true"></i>
+          <p>Data security &amp; AI governance</p>
+          <span class="spotlight-pill">Spotlight</span>
+        </div>
+        <p class="card-desc">Quantified sensitive-data and AI exposure across 112 AWS accounts — ~50 issues surfaced, ~25 Critical-severity findings.</p>
+        <div class="stack-row card-stack">
+          <span class="stack-tag">Wiz CNAPP</span>
+          <span class="stack-tag">KMS</span>
+          <span class="stack-tag">IAM Access Analyzer</span>
+        </div>
+        <div class="card-footer">
+          <span class="hint">112 accounts · ~25 critical findings</span>
+          <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Card: CSPM -->
+      <div class="card" data-theme="cspm" data-modal="cspm">
+        <div class="card-title-row">
+          <i class="ti ti-target" aria-hidden="true"></i>
+          <p>CSPM remediation program</p>
+        </div>
+        <p class="card-desc">Operating model that turned Wiz findings into prioritized, owned, auditable remediation.</p>
+        <div class="stack-row card-stack">
+          <span class="stack-tag">Wiz</span>
+          <span class="stack-tag">CNAPP</span>
+          <span class="stack-tag">ServiceNow</span>
+        </div>
+        <div class="card-footer">
+          <span class="hint">Risk-based prioritization</span>
+          <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Card: Cloudflare Edge -->
+      <div class="card" data-theme="edge" data-modal="edge">
+        <div class="card-title-row">
+          <i class="ti ti-cloud-lock" aria-hidden="true"></i>
+          <p>Cloudflare edge security pattern</p>
+        </div>
+        <p class="card-desc">Reusable ingress pattern for public-facing apps adopted as the enterprise standard.</p>
+        <div class="stack-row card-stack">
+          <span class="stack-tag">Cloudflare</span>
+          <span class="stack-tag">Route 53</span>
+          <span class="stack-tag">WAF</span>
+        </div>
+        <div class="card-footer">
+          <span class="hint">Validated · evidence-based</span>
+          <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Card: Network Governance -->
+      <div class="card" data-theme="network" data-modal="network">
+        <div class="card-title-row">
+          <i class="ti ti-network" aria-hidden="true"></i>
+          <p>Secure migration &amp; network governance</p>
+        </div>
+        <p class="card-desc">Two-tier segmentation and exception governance that kept migration moving without security debt.</p>
+        <div class="stack-row card-stack">
+          <span class="stack-tag">Network Firewall</span>
+          <span class="stack-tag">CloudWan</span>
+          <span class="stack-tag">OpenSearch</span>
+        </div>
+        <div class="card-footer">
+          <span class="hint">Macro + micro segmentation</span>
+          <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close"><i class="ti ti-x" aria-hidden="true"></i></button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+  const projectData = {
+    baseline: {
+      accent: "var(--c-baseline-border)",
+      bg: "var(--c-baseline-bg)",
+      ink: "var(--c-baseline-ink)",
+      breadcrumb: "Selected engagements / Cloud security advisory",
+      title: "Enterprise AWS security assessment & control baseline",
+      meta: "Global agribusiness · Multi-account AWS estate",
+      anchors: [
+        { label: "Scope", value: "Enterprise", sub: false },
+        { label: "Frameworks", value: "CIS · NIST · CSA CCM", sub: true },
+        { label: "Output", value: "Maturity roadmap", sub: true }
+      ],
+      challenge: "The client had invested heavily in security tooling, but coverage was inconsistent across accounts. New environments launched without baseline controls, ownership of detection-to-response was unclear, and recurring findings revealed a reactive rather than preventive posture.",
+      approach: "We led a full-scope AWS security assessment across prevention, detection, response, and governance. Defined a required security-service baseline for every account. Designed preventive guardrails via AWS Control Tower and Service Control Policies. Centralized logging into the enterprise SIEM. Mapped controls to CIS, NIST, and CSA CCM and delivered a prioritized maturity roadmap.",
+      outcomes: [
+        "Moved the organization from tool-based coverage to a structured security operating model",
+        "Reduced time-to-secure-production-ready from ~3 weeks to days for new AWS accounts",
+        "Mapped over 100 controls across CIS, NIST, and CSA CCM — audit-ready evidence base",
+        "Reduced recurring critical findings by an estimated 40–55% through preventive guardrails",
+        "Estimated annual risk avoidance: $500K – $1M"
+      ],
+      services: ["Security assessment", "Governance design", "Control baseline", "Maturity roadmap"],
+      stack: ["AWS Control Tower", "Organizations", "SCPs", "Security Hub", "GuardDuty", "Inspector", "Terraform"]
+    },
+    data: {
+      accent: "var(--c-data-border)",
+      bg: "var(--c-data-bg)",
+      ink: "var(--c-data-ink)",
+      breadcrumb: "Selected engagements / Data security",
+      title: "Data security & AI governance readiness",
+      meta: "Global agribusiness · Across 112 AWS accounts",
+      anchors: [
+        { label: "AWS accounts", value: "112", sub: false },
+        { label: "Issues surfaced", value: "~50", sub: false },
+        { label: "Critical severity", value: "~25", sub: false, danger: true }
+      ],
+      challenge: "Rapid AI adoption was outpacing data governance. Sensitive data was accumulating across S3, databases, and AI services with no unified view of exposure. Plaintext secrets and unauthenticated AI endpoints surfaced case by case with no governance layer.",
+      approach: "We drove a sensitive-data and AI-exposure assessment across the AWS estate. Proposed a readiness model covering discovery, classification (public → restricted → regulated), storage governance for S3 and databases, access-control validation, and AI/GenAI usage guardrails. Designed executive reporting that translates data risk into business language.",
+      outcomes: [
+        "Quantified data and AI exposure across 112 accounts: ~50 issues, ~25 Critical-severity findings",
+        "Reduced plaintext secrets in code repositories by ~85% within 90 days",
+        "First enterprise data classification scheme adopted across six business units",
+        "Defined the AI usage guardrail policy that became the AI acceptable-use standard",
+        "Leadership dashboards reviewed monthly by the CISO and quarterly by the executive risk committee"
+      ],
+      services: ["Data classification", "AI governance", "Sensitive data discovery", "Executive reporting"],
+      stack: ["Wiz CNAPP", "AWS Macie", "KMS", "IAM Access Analyzer", "Bedrock", "SageMaker"]
+    },
+    cspm: {
+      accent: "var(--c-cspm-border)",
+      bg: "var(--c-cspm-bg)",
+      ink: "var(--c-cspm-ink)",
+      breadcrumb: "Selected engagements / Posture management",
+      title: "Enterprise CSPM remediation program",
+      meta: "Global agribusiness · Multi-cloud environment",
+      anchors: [
+        { label: "Platform", value: "Wiz CSPM/CNAPP", sub: true },
+        { label: "Approach", value: "Risk-based", sub: true },
+        { label: "Mapping", value: "CIS · NIST · CSA CCM", sub: true }
+      ],
+      challenge: "Full visibility into cloud risk through Wiz had become the problem — findings piled up faster than teams could close them. The central security team was the bottleneck for every interpretation and remediation decision, and remediation was inconsistent across accounts.",
+      approach: "We rebuilt remediation as an operating model. Established risk-based prioritization using severity, exposure, asset criticality, and toxic-combination logic. Authored master runbooks. Designed a time-bound exception workflow with named owners and risk acceptance. Shifted prevention left via Wiz IaC scanning in the pipeline.",
+      outcomes: [
+        "Reduced repeat findings by an estimated 60–70% through IaC-stage prevention",
+        "Reduced central cloud security escalations on routine findings by ~45%",
+        "Open exceptions reduced from over 180 to under 60 within two quarters",
+        "Self-service remediation guidance mapped to CIS, NIST, CSA CCM",
+        "Foundation for measurable, repeatable audit readiness"
+      ],
+      services: ["CSPM operating model", "Runbook design", "Exception governance", "Risk-based prioritization"],
+      stack: ["Wiz CSPM", "Wiz CNAPP", "Wiz IaC", "Wiz Mika AI", "AWS", "Terraform", "ServiceNow"]
+    },
+    edge: {
+      accent: "var(--c-edge-border)",
+      bg: "var(--c-edge-bg)",
+      ink: "var(--c-edge-ink)",
+      breadcrumb: "Selected engagements / Application security",
+      title: "Cloudflare edge security pattern for public-facing applications",
+      meta: "Global agribusiness · Public application portfolio",
+      anchors: [
+        { label: "Outcome", value: "Enterprise standard", sub: true },
+        { label: "Protection", value: "WAF · Bot · DDoS", sub: true },
+        { label: "Validation", value: "Evidence-based", sub: true }
+      ],
+      challenge: "Each application team was solving edge security on its own — inconsistent DNS, varied TLS configurations, ad-hoc WAF rules, no shared pattern for bot or DDoS protection. Every new public app onboarding became a custom security design exercise.",
+      approach: "We designed and validated a reusable Cloudflare ingress pattern: Route 53 DNS with Cloudflare-proxied subdomains, WAF with OWASP Core Rule Set, advanced rate limiting, bot management, DDoS protection, TLS termination at Cloudflare with re-encryption to AWS ALB, and origin protection. We captured test evidence (headers, DNS lookups, simulated bot patterns) so each control was demonstrably active end-to-end.",
+      outcomes: [
+        "Reusable ingress pattern adopted as the enterprise standard for public-facing apps",
+        "New app security design reduced from 2–3 weeks of bespoke work to under 2 days",
+        "Early metrics: 90%+ reduction in known-bad bot requests reaching origin",
+        "Evidence-based validation package that holds up in architecture review and audit",
+        "Estimated annual engineering savings: $120K – $180K"
+      ],
+      services: ["Edge architecture", "WAF design", "TLS validation", "Pattern documentation"],
+      stack: ["Cloudflare WAF", "Bot Management", "Rate Limiting", "Route 53", "ALB", "TLS/mTLS"]
+    },
+    network: {
+      accent: "var(--c-network-border)",
+      bg: "var(--c-network-bg)",
+      ink: "var(--c-network-ink)",
+      breadcrumb: "Selected engagements / Network security",
+      title: "Secure cloud migration & network governance",
+      meta: "Global agribusiness · AWS migration program",
+      anchors: [
+        { label: "Phase", value: "Migration hypercare", sub: true },
+        { label: "Model", value: "Macro + micro segmentation", sub: true },
+        { label: "Output", value: "Network playbook", sub: true }
+      ],
+      challenge: "During migration hypercare, application teams needed firewall changes fast to keep the business running. The pressure produced overly broad rules, undocumented exceptions, and a blurred line between true blockers and operational convenience.",
+      approach: "We built a two-tier segmentation model — Amazon Network Firewall for macro-segmentation and inspection, security groups for workload-level micro-segmentation. Created an exception governance process requiring justification, expiry, ownership, and risk acceptance. Established firewall and flow-log dashboards so teams could self-diagnose blocked traffic.",
+      outcomes: [
+        "Zero migration-blocking incidents attributable to firewall or network policy",
+        "Auditable trail for every temporary exception with automatic expiry",
+        "Network security escalations reduced by approximately 50% through self-service",
+        "Reusable network security playbook adopted for subsequent migration waves",
+        "Open exceptions reduced from over 90 to under 25 within two quarters"
+      ],
+      services: ["Network segmentation", "Exception governance", "Migration support", "Dashboard design"],
+      stack: ["Amazon Network Firewall", "Security Groups", "VPC Flow Logs", "AWS CloudWan", "OpenSearch"]
+    }
+  };
+
+  const backdrop = document.getElementById('modalBackdrop');
+  const modalContent = document.getElementById('modalContent');
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+
+  function openModal(key) {
+    const data = projectData[key];
+    if (!data) return;
+
+    modal.style.setProperty('--modal-accent', data.accent);
+    modal.style.setProperty('--modal-anchor-bg', data.bg);
+    modal.style.setProperty('--modal-ink', data.ink);
+
+    const anchorsHtml = data.anchors.map(a => {
+      const valueClass = a.sub ? 'value sub' : (a.danger ? 'value danger' : 'value');
+      return `
+        <div class="modal-anchor">
+          <p class="label">${a.label}</p>
+          <p class="${valueClass}">${a.value}</p>
+        </div>`;
+    }).join('');
+
+    const outcomesHtml = data.outcomes.map(o =>
+      `<div class="outcome-item"><i class="ti ti-check" aria-hidden="true"></i><p>${o}</p></div>`
+    ).join('');
+
+    const servicesHtml = data.services.map(s =>
+      `<span class="service-tag">${s}</span>`
+    ).join('');
+
+    const stackHtml = data.stack.map(s =>
+      `<span class="stack-tag">${s}</span>`
+    ).join('');
+
+    modalContent.innerHTML = `
+      <p class="breadcrumb">${data.breadcrumb}</p>
+      <h2>${data.title}</h2>
+      <p class="meta-line">${data.meta}</p>
+      <div class="modal-anchors">${anchorsHtml}</div>
+      <div class="modal-section">
+        <p class="section-label">Challenge</p>
+        <p>${data.challenge}</p>
+      </div>
+      <div class="modal-section">
+        <p class="section-label">What we did</p>
+        <p>${data.approach}</p>
+      </div>
+      <div class="modal-section">
+        <p class="section-label">Outcomes</p>
+        ${outcomesHtml}
+      </div>
+      <div class="modal-footer-grid">
+        <div class="col">
+          <p class="section-label">Services</p>
+          <div>${servicesHtml}</div>
+        </div>
+        <div class="col">
+          <p class="section-label">Stack</p>
+          <div>${stackHtml}</div>
+        </div>
+      </div>
+    `;
+
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(el => {
+    el.addEventListener('click', () => openModal(el.dataset.modal));
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e => {
+    if (e.target === backdrop) closeModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+</body>
+</html>
