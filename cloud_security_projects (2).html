@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selected Engagements — Cloud Security Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<style>
+  :root {
+    --bg-page: #F7F4EC;
+    --bg-page-2: #EFEADD;
+    --bg-surface: #F2EEE3;
+    --bg-card: #FFFDF8;
+    --bg-muted: #F0ECE0;
+    --text-primary: #211E18;
+    --text-secondary: #5E594E;
+    --text-tertiary: #938D7E;
+    --ink-deep: #14110B;
+
+    /* Per-project accent palette — deepened & jewel-toned */
+    --c-baseline-bg: #E9F1FA;
+    --c-baseline-ink: #1A4A86;
+    --c-baseline-border: #3F77BC;
+    --c-baseline-glow: rgba(63, 119, 188, 0.22);
+
+    --c-data-bg: #E0F1EA;
+    --c-data-ink: #0C6249;
+    --c-data-border: #1F9572;
+    --c-data-glow: rgba(31, 149, 114, 0.22);
+
+    --c-cspm-bg: #F8EAD2;
+    --c-cspm-ink: #8A4E08;
+    --c-cspm-border: #C0780F;
+    --c-cspm-glow: rgba(192, 120, 15, 0.22);
+
+    --c-edge-bg: #ECE8F8;
+    --c-edge-ink: #3A2F87;
+    --c-edge-border: #6F63D6;
+    --c-edge-glow: rgba(111, 99, 214, 0.22);
+
+    --c-network-bg: #FBE6EE;
+    --c-network-ink: #962E53;
+    --c-network-border: #CE4A78;
+    --c-network-glow: rgba(206, 74, 120, 0.22);
+
+    --text-danger: #A32D2D;
+    --text-success: #2F7A2F;
+    --border-light: rgba(40, 33, 20, 0.10);
+    --border-medium: rgba(40, 33, 20, 0.18);
+    --gold: #B08534;
+
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 22px;
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-sans: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --shadow-soft: 0 1px 2px rgba(40,33,20,0.04), 0 6px 18px rgba(40,33,20,0.05);
+    --shadow-lift: 0 18px 48px rgba(40,33,20,0.14);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 3.5rem 1.25rem 4rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    min-height: 100vh;
+    background:
+      radial-gradient(1100px 520px at 12% -8%, #FCFAF3 0%, rgba(252,250,243,0) 60%),
+      radial-gradient(900px 600px at 100% 0%, #EAF1EC 0%, rgba(234,241,236,0) 55%),
+      radial-gradient(800px 700px at 50% 120%, #F2E9DA 0%, rgba(242,233,218,0) 60%),
+      linear-gradient(180deg, var(--bg-page) 0%, var(--bg-page-2) 100%);
+    background-attachment: fixed;
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============ HEADER ============ */
+  .header {
+    margin-bottom: 2.75rem;
+    text-align: center;
+    opacity: 0;
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+
+  .eyebrow {
+    font-size: 11.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    margin: 0 0 18px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .header h1 {
+    margin: 0 0 14px;
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 60px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    color: var(--ink-deep);
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  .header p.subtitle {
+    font-size: 15.5px;
+    color: var(--text-secondary);
+    margin: 0 auto;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+
+  /* ============ GRID SHELL ============ */
+  .grid-shell {
+    background: linear-gradient(180deg, rgba(255,253,248,0.55), rgba(242,238,227,0.35));
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Staggered reveal helper */
+  .reveal { opacity: 0; animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
+  .reveal[data-d="1"] { animation-delay: 0.10s; }
+  .reveal[data-d="2"] { animation-delay: 0.18s; }
+  .reveal[data-d="3"] { animation-delay: 0.26s; }
+  .reveal[data-d="4"] { animation-delay: 0.34s; }
+  .reveal[data-d="5"] { animation-delay: 0.42s; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============ FEATURED TILE ============ */
+  .featured {
+    background:
+      radial-gradient(120% 140% at 100% 0%, var(--c-baseline-bg) 0%, rgba(255,253,248,0) 42%),
+      var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 2rem 2.1rem;
+    margin-bottom: 14px;
+    cursor: pointer;
+    transition: transform 0.32s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.32s ease, border-color 0.32s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  .featured::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--c-baseline-border), var(--c-baseline-ink));
+  }
+  .featured::after {
+    content: "";
+    position: absolute;
+    top: -40%; right: -10%;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, var(--c-baseline-glow), transparent 68%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .featured:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--c-baseline-border);
+  }
+  .featured:hover::after { opacity: 1; }
+
+  .featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--c-baseline-bg);
+    color: var(--c-baseline-ink);
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 5px 13px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .featured-badge i { font-size: 13px; }
+
+  .featured-industry {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+
+  .featured-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .featured-title-row .icon-wrap {
+    flex-shrink: 0;
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    display: grid; place-items: center;
+    background: var(--c-baseline-bg);
+    color: var(--c-baseline-ink);
+    box-shadow: inset 0 0 0 1px var(--border-light);
+  }
+  .featured-title-row .icon-wrap i { font-size: 24px; }
+  .featured-title-row p {
+    font-family: var(--font-display);
+    font-size: 25px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 4px 0 0;
+    line-height: 1.18;
+  }
+
+  .featured-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0 0 20px;
+    line-height: 1.62;
+    max-width: 92%;
+  }
+
+  .anchor-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .anchor {
+    background: linear-gradient(180deg, var(--c-baseline-bg), rgba(255,253,248,0));
+    border-radius: var(--radius-md);
+    padding: 13px 15px;
+    border-left: 3px solid var(--c-baseline-border);
+  }
+  .anchor .label {
+    font-size: 9.5px;
+    color: var(--c-baseline-ink);
+    margin: 0 0 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .anchor .value {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .featured-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .stack-row { display: flex; gap: 7px; flex-wrap: wrap; }
+  .stack-tag {
+    font-size: 10.5px;
+    padding: 4px 11px;
+    background: var(--bg-muted);
+    border: 1px solid var(--border-light);
+    border-radius: 100px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .cta {
+    font-size: 13px;
+    color: var(--c-baseline-ink);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+  .cta i { font-size: 15px; transition: transform 0.3s cubic-bezier(0.2,0.7,0.2,1); }
+  .featured:hover .cta i, .card:hover .card-footer i.arrow { transform: translateX(5px); }
+
+  /* ============ SUPPORTING CARD GRID ============ */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 1.4rem 1.5rem;
+    cursor: pointer;
+    transition: border-color 0.32s ease, transform 0.32s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.32s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--text-secondary));
+  }
+  .card::after {
+    content: "";
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, var(--card-glow, transparent), transparent 68%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--card-accent);
+  }
+  .card:hover::after { opacity: 1; }
+
+  .card[data-theme="data"]    { --card-accent: var(--c-data-border);    --card-glow: var(--c-data-glow); }
+  .card[data-theme="cspm"]    { --card-accent: var(--c-cspm-border);    --card-glow: var(--c-cspm-glow); }
+  .card[data-theme="edge"]    { --card-accent: var(--c-edge-border);    --card-glow: var(--c-edge-glow); }
+  .card[data-theme="network"] { --card-accent: var(--c-network-border); --card-glow: var(--c-network-glow); }
+
+  .card-industry {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+
+  .card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 10px;
+  }
+  .card-title-row .icon-wrap {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    box-shadow: inset 0 0 0 1px var(--border-light);
+    flex-shrink: 0;
+  }
+  .card[data-theme="data"] .icon-wrap    { background: var(--c-data-bg);    color: var(--c-data-ink); }
+  .card[data-theme="cspm"] .icon-wrap    { background: var(--c-cspm-bg);    color: var(--c-cspm-ink); }
+  .card[data-theme="edge"] .icon-wrap    { background: var(--c-edge-bg);    color: var(--c-edge-ink); }
+  .card[data-theme="network"] .icon-wrap { background: var(--c-network-bg); color: var(--c-network-ink); }
+  .card-title-row .icon-wrap i { font-size: 20px; }
+
+  .card-title-row p {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+  }
+
+  .spotlight-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    padding: 3px 9px;
+    border-radius: 100px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    background: var(--c-data-bg);
+    color: var(--c-data-ink);
+    white-space: nowrap;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0 0 16px;
+    line-height: 1.6;
+  }
+
+  .card-stack { margin-bottom: 14px; }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+  }
+  .card-footer .hint {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .card-footer .hint i { font-size: 13px; }
+  .card-footer i.arrow { font-size: 15px; color: var(--text-secondary); transition: transform 0.3s cubic-bezier(0.2,0.7,0.2,1); }
+
+  /* ============ FOOTNOTE ============ */
+  .shell-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+  }
+
+  /* ============ MODAL ============ */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 17, 11, 0.5);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 100;
+    padding: 2.5rem 1rem;
+    overflow-y: auto;
+  }
+  .modal-backdrop.active { display: flex; }
+
+  .modal {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    max-width: 800px;
+    width: 100%;
+    padding: 2.4rem 2.6rem;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(20, 17, 11, 0.35);
+    border-top: 5px solid var(--modal-accent, var(--c-baseline-border));
+    margin: auto;
+    animation: modalIn 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.985); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 18px; right: 18px;
+    background: var(--bg-muted);
+    border: 1px solid var(--border-light);
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: grid; place-items: center;
+    color: var(--text-secondary);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .modal-close:hover { background: var(--bg-surface); transform: rotate(90deg); }
+  .modal-close i { font-size: 18px; }
+
+  .breadcrumb {
+    font-size: 10.5px;
+    color: var(--modal-ink, var(--text-tertiary));
+    margin: 0 0 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 600;
+  }
+
+  .modal h2 {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.14;
+    color: var(--ink-deep);
+  }
+  .modal .meta-line {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0 0 1.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .modal .meta-line i { font-size: 14px; color: var(--modal-ink); }
+
+  .modal-anchors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 1.8rem;
+  }
+  .modal-anchor {
+    background: linear-gradient(180deg, var(--modal-anchor-bg, var(--c-baseline-bg)), rgba(255,253,248,0));
+    border-radius: var(--radius-md);
+    padding: 15px 17px;
+    border-left: 3px solid var(--modal-accent, var(--c-baseline-border));
+  }
+  .modal-anchor .label {
+    font-size: 9.5px;
+    color: var(--modal-ink, var(--c-baseline-ink));
+    margin: 0 0 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .modal-anchor .value {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.15;
+  }
+  .modal-anchor .value.sub { font-size: 14px; font-weight: 600; font-family: var(--font-sans); }
+  .modal-anchor .value.danger { color: var(--text-danger); }
+
+  .modal-section { margin-bottom: 1.5rem; }
+  .modal-section .section-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--modal-ink, var(--text-tertiary));
+    margin: 0 0 9px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .modal-section .section-label::before {
+    content: "";
+    width: 16px; height: 2px;
+    background: var(--modal-accent);
+    border-radius: 2px;
+  }
+  .modal-section p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin: 0 0 10px;
+    color: var(--text-primary);
+  }
+  .modal-section p:last-child { margin-bottom: 0; }
+
+  .lessons {
+    background: linear-gradient(180deg, var(--modal-anchor-bg), rgba(255,253,248,0));
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    border-left: 3px solid var(--modal-accent);
+  }
+  .lessons p { font-size: 14.5px; line-height: 1.7; margin: 0; font-style: italic; color: var(--text-primary); }
+
+  .outcome-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin-bottom: 10px;
+  }
+  .outcome-item i {
+    font-size: 13px;
+    color: #fff;
+    background: var(--modal-accent);
+    border-radius: 50%;
+    width: 18px; height: 18px;
+    display: grid; place-items: center;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .outcome-item p { font-size: 14px; line-height: 1.55; margin: 0; }
+  .outcome-item strong { font-weight: 700; }
+
+  .modal-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--border-light);
+    margin-top: 1.5rem;
+  }
+  .modal-footer-grid .col p.section-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-tertiary);
+    margin: 0 0 10px;
+    font-weight: 700;
+  }
+  .service-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 5px 11px;
+    background: var(--modal-anchor-bg, var(--c-baseline-bg));
+    color: var(--modal-ink, var(--c-baseline-ink));
+    border-radius: 100px;
+    margin: 0 5px 5px 0;
+    font-weight: 500;
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 720px) {
+    body { padding: 2.25rem 0.9rem 3rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .featured { padding: 1.5rem 1.35rem; }
+    .featured-desc { max-width: 100%; }
+    .featured-title-row p { font-size: 21px; }
+    .anchor-strip { grid-template-columns: 1fr; gap: 9px; }
+    .modal-anchors { grid-template-columns: 1fr; }
+    .modal { padding: 1.75rem 1.4rem; }
+    .modal-footer-grid { grid-template-columns: 1fr; }
+    .featured-footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <p class="eyebrow">Cloud Security Advisory</p>
+    <h1>Selected <em>Engagements</em></h1>
+    <p class="subtitle">How we turn cloud security risk into operating models engineers run and executives trust. Select any engagement to read the full case study.</p>
+  </div>
+
+  <div class="grid-shell reveal" data-d="1">
+
+    <!-- FEATURED TILE -->
+    <div class="featured reveal" data-d="1" data-modal="baseline">
+      <div class="featured-badge"><i class="ti ti-star" aria-hidden="true"></i> Featured engagement</div>
+      <p class="featured-industry">Financial institution</p>
+      <div class="featured-title-row">
+        <span class="icon-wrap"><i class="ti ti-building-fortress" aria-hidden="true"></i></span>
+        <p>Enterprise AWS Security Assessment &amp; Control Baseline</p>
+      </div>
+      <p class="featured-desc">A full assessment that moved a well-resourced security program from inconsistent, reactive coverage to a clear, structured one — with an agreed baseline of controls, guardrails that prevent problems before they happen, clear ownership, and a step-by-step roadmap.</p>
+
+      <div class="anchor-strip">
+        <div class="anchor">
+          <p class="label">Scope</p>
+          <p class="value">Multi-account AWS estate</p>
+        </div>
+        <div class="anchor">
+          <p class="label">Frameworks</p>
+          <p class="value">CIS · NIST · CSA CCM</p>
+        </div>
+        <div class="anchor">
+          <p class="label">Risk avoided / yr</p>
+          <p class="value">$500K – $1M</p>
+        </div>
+      </div>
+
+      <div class="featured-footer">
+        <div class="stack-row">
+          <span class="stack-tag">Control Tower</span>
+          <span class="stack-tag">SCPs</span>
+          <span class="stack-tag">Security Hub</span>
+          <span class="stack-tag">GuardDuty</span>
+          <span class="stack-tag">Terraform</span>
+        </div>
+        <span class="cta">Read case study <i class="ti ti-arrow-right" aria-hidden="true"></i></span>
+      </div>
+    </div>
+
+    <!-- 2x2 SUPPORTING GRID -->
+    <div class="card-grid">
+
+      <!-- Card: Data Security (Spotlight) -->
+      <div class="card reveal" data-d="2" data-theme="data" data-modal="data">
+        <p class="card-industry">Supply chain &amp; logistics</p>
+        <div class="card-title-row">
+          <span class="icon-wrap"><i class="ti ti-database-cog" aria-hidden="true"></i></span>
+          <p>Data Security &amp; AI Governance<span class="spotlight-pill"><i class="ti ti-sparkles" aria-hidden="true"></i> Spotlight</span></p>
+        </div>
+        <p class="card-desc">A data-first program — classification, encryption, storage posture, and access — that mapped sensitive data across 112 accounts and made AI governance a natural next layer.</p>
+        <div class="stack-row card-stack">
+          <span class="stack-tag">Wiz CNAPP</span>
+          <span class="stack-tag">KMS</span>
+          <span class="stack-tag">Macie</span>
+        </div>
+        <div class="card-footer">
+          <span class="hint"><i class="ti ti-folders" aria-hidden="true"></i> 112 accounts · ~25 critical</span>
+          <i class="ti ti-arrow-right arrow" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Card: CSPM -->
+      <div class="card reveal" data-d="3" data-theme="cspm" data-modal="cspm">
+        <p class="card-industry">Multi-cloud manufacturer</p>
+        <div class="card-title-row">
+          <span class="icon-wrap"><i class="ti ti-target-arrow" aria-hidden="true"></i></span>
+          <p>CSPM Remediation Program</p>
+        </div>
+        <p class="card-desc">A data-aware operating model that scored findings by data sensitivity — turning an unworkable Wiz backlog into prioritized, owned, auditable remediation.</p>
+        <div class="stack-row card-stack">
+          <span class="stack-tag">Wiz</span>
+          <span class="stack-tag">Wiz IaC</span>
+          <span class="stack-tag">ServiceNow</span>
+        </div>
+        <div class="card-footer">
+          <span class="hint"><i class="ti ti-list-check" aria-hidden="true"></i> 180 → &lt;60 exceptions</span>
+          <i class="ti ti-arrow-right arrow" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Card: Cloudflare Edge -->
+      <div class="card reveal" data-d="4" data-theme="edge" data-modal="edge">
+        <p class="card-industry">Consumer packaged goods</p>
+        <div class="card-title-row">
+          <span class="icon-wrap"><i class="ti ti-cloud-lock" aria-hidden="true"></i></span>
+          <p>Cloudflare Edge Security Pattern</p>
+        </div>
+        <p class="card-desc">One agreed standard for protecting public-facing apps — a reusable, tested baseline for web application firewall, DDoS protection, and how traffic gets in — replacing an inconsistent mix of AWS WAF and Cloudflare.</p>
+        <div class="stack-row card-stack">
+          <span class="stack-tag">Cloudflare</span>
+          <span class="stack-tag">Route 53</span>
+          <span class="stack-tag">WAF</span>
+        </div>
+        <div class="card-footer">
+          <span class="hint"><i class="ti ti-shield-check" aria-hidden="true"></i> 90%+ bad bots blocked</span>
+          <i class="ti ti-arrow-right arrow" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Card: Network Governance -->
+      <div class="card reveal" data-d="5" data-theme="network" data-modal="network">
+        <p class="card-industry">Supply chain &amp; logistics</p>
+        <div class="card-title-row">
+          <span class="icon-wrap"><i class="ti ti-binary-tree" aria-hidden="true"></i></span>
+          <p>Secure Migration &amp; Network Governance</p>
+        </div>
+        <p class="card-desc">Two-tier segmentation and exception governance that kept a multi-year migration moving fast — without inheriting a permanent backlog of network security debt.</p>
+        <div class="stack-row card-stack">
+          <span class="stack-tag">Network Firewall</span>
+          <span class="stack-tag">CloudWAN</span>
+          <span class="stack-tag">OpenSearch</span>
+        </div>
+        <div class="card-footer">
+          <span class="hint"><i class="ti ti-bolt" aria-hidden="true"></i> Zero blocking incidents</span>
+          <i class="ti ti-arrow-right arrow" aria-hidden="true"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="shell-footer">Client identities anonymized · Figures are estimated ranges for illustration</p>
+  </div>
+
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close"><i class="ti ti-x" aria-hidden="true"></i></button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+  const projectData = {
+    baseline: {
+      accent: "var(--c-baseline-border)", bg: "var(--c-baseline-bg)", ink: "var(--c-baseline-ink)",
+      breadcrumb: "Featured engagement · Cloud security advisory",
+      title: "Enterprise AWS Security Assessment & Control Baseline",
+      meta: "Financial institution · Multi-account AWS estate",
+      anchors: [
+        { label: "Controls mapped", value: "100+", sub: false },
+        { label: "Recurring criticals", value: "−40–55%", sub: true },
+        { label: "Risk avoided / yr", value: "$500K–$1M", sub: true }
+      ],
+      scenario: [
+        "A financial institution had moved most of its applications to AWS and bought a strong set of security tools along the way \u2014 Wiz, Security Hub, GuardDuty, Inspector, Macie, Arctic Wolf, and others. On paper the program looked well funded. In practice, the team could not say with confidence how well any given account was protected. Ask two people and you would often get two different answers.",
+        "This was costing real time and goodwill. When clients and partners sent security questionnaires, answering them took weeks, because no one could give a clear, consistent picture of how the accounts were secured. A few deals slowed in procurement while evidence was pulled together, and audits kept raising the same issues quarter after quarter \u2014 which made every renewal harder than it should have been.",
+        "The reason behind all of it was simple: the program reacted to problems instead of preventing them. Coverage varied from account to account, new environments went live without an agreed set of baseline controls, and no single team owned the path from alert to fix. Leadership did not need another tool. They needed a clear view of what they already had, what was missing, and what a healthy program should look like."
+      ],
+      solution: [
+        "We ran a full-scope AWS security assessment across prevention, detection, response, and governance — going to the root of why findings kept recurring rather than just cataloguing them, and mapping controls to CIS, NIST, and CSA CCM.",
+        "From there we designed a required security-service baseline every account had to meet before hosting production, implemented preventive guardrails through Control Tower and Service Control Policies, standardized logging into the enterprise SIEM, and redrew detection-to-response with named owners and clear SLAs — delivered as a 30/90/365-day maturity roadmap."
+      ],
+      outcomes: [
+        "Moved from tool-based coverage to a structured operating model with clear ownership across prevention, detection, response, and governance",
+        "Cut new-account time-to-production-ready from <strong>~3 weeks to days</strong>",
+        "Mapped <strong>100+ controls</strong> across CIS, NIST, and CSA CCM — an audit-ready evidence base",
+        "Reduced recurring critical findings by an estimated <strong>40–55%</strong> via preventive guardrails",
+        "Estimated annual risk avoidance of <strong>$500K–$1M</strong>"
+      ],
+      lessons: "Tooling spend isn't security maturity. The fastest commercial wins came from defining a baseline and making prevention the default — which is also what shortened the sales and audit conversations the business cared about most.",
+      services: ["Security maturity assessment", "Control baseline design", "Guardrails & policy-as-code", "Governance model", "Maturity roadmap"],
+      stack: ["AWS Control Tower", "Organizations", "SCPs", "Security Hub", "GuardDuty", "Inspector", "Macie", "Terraform", "ServiceNow"]
+    },
+    data: {
+      accent: "var(--c-data-border)", bg: "var(--c-data-bg)", ink: "var(--c-data-ink)",
+      breadcrumb: "Spotlight engagement · Data security",
+      title: "Data Security & AI Governance Readiness",
+      meta: "Global supply chain & logistics · Across 112 AWS accounts",
+      anchors: [
+        { label: "AWS accounts", value: "112", sub: false },
+        { label: "Issues surfaced", value: "~50", sub: false },
+        { label: "Critical severity", value: "~25", sub: false, danger: true }
+      ],
+      scenario: [
+        "A global supply chain and logistics company had a problem that is more common than most leaders admit: no one could say exactly where the company's most sensitive data was kept, or who could open it. Over the years, customer records, carrier and supplier financials, and regulated shipping documents had spread across many places \u2014 S3 storage buckets, RDS and Aurora databases, and a long list of other data services. There was no single map of any of it.",
+        "That gap was already causing harm. When a major customer asked the company to prove its data was encrypted and kept separate from other clients' data, it took nearly two weeks to put together a shaky answer \u2014 long enough for the renewal talks to cool off. Auditors kept finding the same contradiction: data marked highly sensitive in one system sat openly readable in another, mostly because no one had agreed what \u201Csensitive\u201D even meant.",
+        "Four things were driving this, all about the data rather than the tools. There was no way to label data by how sensitive it was, so ordinary and highly sensitive information were protected the same way. Storage settings had drifted, so encryption, public-access controls, and backups were applied differently from place to place. Access was too broad \u2014 permissions (managed through AWS IAM) often gave far more reach than anyone could justify. And the company only looked for exposed data at audit time, so problems were always caught late."
+      ],
+      solution: [
+        "We began with the data itself — using Wiz CNAPP plus hands-on review to build the first end-to-end inventory of sensitive data across all 112 accounts: what existed, where it sat, how it was stored, and who could reach it. That surfaced ~50 issues, ~25 Critical: sensitive data in public S3 buckets, databases without encryption at rest, plaintext secrets, and IAM roles with sweeping access.",
+        "On that map we put four data controls in place: a four-tier classification scheme (public / internal / confidential / restricted) tied to regulatory category; storage governance with KMS encryption at rest by default and enforced public-access blocks; least-privilege access validation across IAM and bucket policies; and continuous discovery rather than annual. Every finding was scored by data sensitivity and exposure together.",
+        "With the data foundation in place, we extended the same discipline to AI. Because classification already existed, AI guardrails plugged straight into it — acceptable-use keyed to data tiers (restricted data never leaves approved endpoints), prompt scrubbing for sensitive fields, and authentication for AI endpoints that had been sitting open. AI governance became an extension of data governance, not a separate exercise."
+      ],
+      outcomes: [
+        "First complete map of sensitive data across the estate — <strong>112 accounts, ~50 issues, ~25 Critical</strong>, each with a classification and owner",
+        "Established the enterprise's first <strong>data classification scheme</strong>, adopted across <strong>six business units</strong>",
+        "Brought storage to a consistent baseline (encryption at rest, public-access blocks) and cut exposed plaintext secrets by <strong>~85% within 90 days</strong>",
+        "Tightened access to restricted data via least-privilege IAM and bucket-policy reviews",
+        "Defined the <strong>AI usage guardrail policy</strong> that became the AI acceptable-use standard",
+        "Leadership dashboards by data type, business unit, and regulatory category — turning a two-week scramble into a same-day answer"
+      ],
+      lessons: "You cannot govern AI before you can govern data. Because classification, storage, and access came first, \u201Cwhat can this model touch?\u201D had an answer grounded in a real data map — and the AI controls became a natural next layer rather than a separate fire to fight.",
+      services: ["Sensitive data discovery & mapping", "Data classification", "Storage & encryption governance", "Access control validation", "Data-risk scoring", "AI usage governance"],
+      stack: ["Wiz CNAPP", "AWS Macie", "KMS", "IAM Access Analyzer", "S3", "RDS/Aurora", "Bedrock", "SageMaker"]
+    },
+    cspm: {
+      accent: "var(--c-cspm-border)", bg: "var(--c-cspm-bg)", ink: "var(--c-cspm-ink)",
+      breadcrumb: "Supporting engagement · Posture management",
+      title: "Enterprise CSPM Remediation Program",
+      meta: "Multi-cloud manufacturer · AWS + Azure",
+      anchors: [
+        { label: "Repeat findings", value: "−60–70%", sub: true },
+        { label: "Escalations", value: "−45%", sub: true },
+        { label: "Open exceptions", value: "180 → <60", sub: true }
+      ],
+      scenario: [
+        "A manufacturer running on both AWS and Microsoft Azure had strong visibility into its cloud security risks through Wiz, a cloud security posture management (CSPM) tool that continuously scans for misconfigurations. The dashboard showed thousands of issues across both clouds, all neatly catalogued. The trouble was that seeing the problems had not made the company safer, because almost none of them were getting fixed.",
+        "The most worrying part was that the issues which truly mattered were lost in the crowd. Sitting in the same long list as minor housekeeping items were genuinely dangerous problems: storage open to the public that held sensitive product and customer data, databases with no encryption, and backups that far too many accounts could reach. Because everything looked the same in the queue, the issues most likely to cause a real breach were not the ones getting attention first.",
+        "Three things were behind this. There were far more issues than the team could ever work through, so the backlog only grew. Fixes were made directly in live systems rather than in the code used to build them \u2014 known as infrastructure-as-code (IaC) \u2014 so the same problems came straight back on the next deployment. And exceptions had no end date, owner, or review, so anything marked \u201Ctemporary\u201D quietly became permanent. Nothing told the difference between a harmless test environment and an exposed store of regulated data."
+      ],
+      solution: [
+        "We rebuilt remediation as an operating model and put data sensitivity at the heart of how findings were ranked. Risk-based prioritization replaced severity-only triage — scoring each finding on severity, exposure, asset criticality, and toxic-combination logic (e.g. public storage + sensitive data + weak encryption). A misconfig on an empty test bucket and the same on a bucket full of customer data no longer looked alike.",
+        "We authored engineering-friendly master runbooks for the highest-volume finding types — including the data-protection fixes (encryption at rest, closing public access, tightening sensitive-bucket policies) that mattered most. A time-bound exception workflow required justification, expiry, owner, and risk acceptance, with sensitive-data exceptions routed to a higher bar. Wiz IaC scanning in CI/CD caught misconfigurations — including data-exposing ones — at pull-request time."
+      ],
+      outcomes: [
+        "Reprioritized the entire backlog around <strong>data sensitivity and exposure</strong>, so breach-likely issues rose to the top",
+        "Reduced repeat findings by an estimated <strong>60–70%</strong> through IaC-stage prevention",
+        "Cut central-team escalations on routine findings by <strong>~45%</strong>",
+        "Open exceptions dropped from <strong>over 180 to under 60</strong> within two quarters",
+        "Self-service remediation guidance mapped to CIS, NIST, CSA CCM — audit evidence in days, not weeks"
+      ],
+      lessons: "Visibility only pays off when remediation can keep up — and remediation only points the right way when it knows what data is at stake. Scoring findings by data sensitivity, not just severity, turned an unworkable queue into a clear order of operations.",
+      services: ["CSPM operating model", "Data-aware risk prioritization", "Runbook design", "Exception governance", "Shift-left IaC integration"],
+      stack: ["Wiz CSPM", "Wiz CNAPP", "Wiz IaC", "Wiz Mika AI", "AWS", "Terraform", "ServiceNow"]
+    },
+    edge: {
+      accent: "var(--c-edge-border)", bg: "var(--c-edge-bg)", ink: "var(--c-edge-ink)",
+      breadcrumb: "Supporting engagement · Application security",
+      title: "Cloudflare Edge Security Pattern for Public-Facing Applications",
+      meta: "Consumer packaged goods · Public application portfolio",
+      anchors: [
+        { label: "Design time", value: "2–3 wks → <2 days", sub: true },
+        { label: "Bad bots blocked", value: "90%+", sub: false },
+        { label: "Eng. savings / yr", value: "$120K–$180K", sub: true }
+      ],
+      scenario: [
+        "A consumer packaged goods company had a growing number of applications open to the public internet \u2014 customer portals, supplier interfaces, and tools for submitting information to regulators. These were the company's front door, and they were not consistently protected. Some sat behind Amazon's own web application firewall (AWS WAF), a service that filters out malicious web traffic. Others had been moved onto Cloudflare and used its protections instead, including encryption in transit (TLS), its own web application firewall, and defense against denial-of-service (DDoS) attacks, where attackers try to overwhelm a site with traffic until it goes down. The result was a patchwork: no two applications were guarded quite the same way.",
+        "This was a growing risk, because online threats keep getting more advanced. As new technologies and applications appear, so do new kinds of attacks \u2014 more automated bot traffic, larger denial-of-service attempts, and constant probing for weak spots. Defending each application differently meant some were well covered while others were left exposed, with no simple way to know which was which. Every new launch also took longer than it should, because the team worked out its internet defenses almost from scratch each time.",
+        "What the company really needed was one agreed standard for protecting anything exposed to the internet, rather than a fresh decision every time. That meant a clear baseline for the core defenses \u2014 the web application firewall, denial-of-service protection, and how traffic is allowed in (the \u201Cingress\u201D path, the route external requests take to reach an application) \u2014 built once and reused everywhere. The open question was whether to standardize on Amazon's built-in protections or use Cloudflare as a single, consistent layer in front of everything. Settling it called for a working, tested example, not just a recommendation on paper."
+      ],
+      solution: [
+        "We designed and validated a reusable Cloudflare ingress pattern folding the strongest protections into one onboarding standard: Route 53 DNS with Cloudflare-proxied subdomains; WAF with the OWASP Core Rule Set; advanced rate limiting; bot management with managed challenges; DDoS protection at L3/L4 and L7; TLS terminated at Cloudflare and re-encrypted to ALB with mTLS; and origin protection locking ALB security groups to Cloudflare IP ranges.",
+        "Crucially, validation was evidence-based, not just configuration-based. We captured test outputs — curl with headers, dig for DNS, simulated bot patterns, rate-limit triggers — proving each control was live end to end, in a package built to satisfy both architecture review and audit."
+      ],
+      outcomes: [
+        "Reusable ingress pattern adopted as the <strong>enterprise standard</strong> for public-facing apps",
+        "Cut new-app security design from <strong>2–3 weeks to under 2 days</strong>",
+        "Early metrics: <strong>90%+ reduction</strong> in known-bad bot requests reaching origin",
+        "Evidence-based validation package that holds up in architecture review and audit",
+        "Estimated annual engineering savings of <strong>$120K–$180K</strong>"
+      ],
+      lessons: "A reusable, evidence-backed pattern beats a one-off design every time. Standardizing the edge didn't just harden the apps — it removed launch friction and gave the business something defensible to show customers and auditors without a fresh scramble each release.",
+      services: ["Edge architecture design", "WAF & bot protection", "TLS validation", "Pattern documentation", "Evidence-based testing"],
+      stack: ["Cloudflare WAF", "Bot Management", "Rate Limiting", "DDoS", "Route 53", "ALB", "TLS/mTLS"]
+    },
+    network: {
+      accent: "var(--c-network-border)", bg: "var(--c-network-bg)", ink: "var(--c-network-ink)",
+      breadcrumb: "Supporting engagement · Network security",
+      title: "Secure Cloud Migration & Network Governance",
+      meta: "Supply chain & logistics · Multi-year AWS migration",
+      anchors: [
+        { label: "Blocking incidents", value: "Zero", sub: true },
+        { label: "Escalations", value: "−50%", sub: true },
+        { label: "Open exceptions", value: "90 → <25", sub: true }
+      ],
+      scenario: [
+        "A supply chain and logistics company was partway through a multi-year move of its systems into AWS, shifting workloads out of its old data centers and into a new, organized cloud setup. During this kind of move, things break in hard-to-predict ways. A workload would shift over, a connection between systems would suddenly stop working, and an engineer would need a firewall change right away to keep shipments and orders flowing. The change would be made quickly \u2014 often broader than necessary and without proper documentation \u2014 and the business kept running, but the security shortcut was left for someone to clean up later.",
+        "The hard part was the constant pull between moving fast and staying safe. Teams under pressure to keep operations running needed firewall changes within hours to fix broken connections or let newly moved systems talk to each other. Wait too long and the business could be disrupted; cut a corner and it would likely become an audit problem down the line. Over time this produced a steady build-up of overly broad rules and undocumented exceptions.",
+        "The real issue was that the speed of the move and the rules meant to keep it secure were working against each other, with nothing in place to balance the two. The line between a genuine emergency and simple convenience kept blurring, and there was no reliable way to make sure temporary exceptions stayed temporary. Leadership wanted to keep the migration moving without ending up with a permanent backlog of loose, unmanaged firewall rules once it was done."
+      ],
+      solution: [
+        "We built a two-tier segmentation model that split enforcement by purpose: Amazon Network Firewall handled macro-segmentation and inspection (broad policies between trust zones, egress filtering, east-west inspection), while security groups handled workload-level micro-segmentation.",
+        "Exception governance changed the dynamics entirely. Every temporary exception now requires a business justification, an expiry date, a named owner, and risk acceptance at the right level — exceptions without an expiry simply couldn't be created. Firewall and VPC Flow Logs fed dashboards engineering teams could query themselves, and anti-patterns were documented alongside the patterns so the same debates didn't get relitigated on the next wave."
+      ],
+      outcomes: [
+        "Completed migration phases with <strong>zero blocking incidents</strong> attributable to firewall or network policy",
+        "Auditable trail for every temporary exception, with automatic expiry forcing review",
+        "Reduced network security escalations by <strong>~50%</strong> through self-service log visibility",
+        "Reusable network security playbook of patterns and anti-patterns adopted for later waves",
+        "Open exceptions inherited from hypercare reduced from <strong>over 90 to under 25</strong> within two quarters"
+      ],
+      lessons: "Velocity and governance only conflict when there's no framework holding them together. Forcing every exception to carry an expiry and an owner let the migration keep its pace while ensuring the security debt got paid down on a schedule — not discovered at audit time.",
+      services: ["Network segmentation design", "Exception governance", "Migration security support", "Dashboard design", "Anti-pattern documentation"],
+      stack: ["Amazon Network Firewall", "Security Groups", "VPC Flow Logs", "AWS CloudWAN", "OpenSearch"]
+    }
+  };
+
+  const backdrop = document.getElementById('modalBackdrop');
+  const modalContent = document.getElementById('modalContent');
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+
+  function openModal(key) {
+    const data = projectData[key];
+    if (!data) return;
+
+    modal.style.setProperty('--modal-accent', data.accent);
+    modal.style.setProperty('--modal-anchor-bg', data.bg);
+    modal.style.setProperty('--modal-ink', data.ink);
+
+    const anchorsHtml = data.anchors.map(a => {
+      const valueClass = a.danger ? 'value danger' : (a.sub ? 'value sub' : 'value');
+      return `<div class="modal-anchor"><p class="label">${a.label}</p><p class="${valueClass}">${a.value}</p></div>`;
+    }).join('');
+
+    const para = arr => arr.map(p => `<p>${p}</p>`).join('');
+
+    const outcomesHtml = data.outcomes.map(o =>
+      `<div class="outcome-item"><i class="ti ti-check" aria-hidden="true"></i><p>${o}</p></div>`
+    ).join('');
+
+    const servicesHtml = data.services.map(s => `<span class="service-tag">${s}</span>`).join('');
+    const stackHtml = data.stack.map(s => `<span class="stack-tag">${s}</span>`).join('');
+
+    modalContent.innerHTML = `
+      <p class="breadcrumb">${data.breadcrumb}</p>
+      <h2>${data.title}</h2>
+      <p class="meta-line"><i class="ti ti-map-pin" aria-hidden="true"></i>${data.meta}</p>
+      <div class="modal-anchors">${anchorsHtml}</div>
+      <div class="modal-section">
+        <p class="section-label">Scenario</p>
+        ${para(data.scenario)}
+      </div>
+      <div class="modal-section">
+        <p class="section-label">Solution</p>
+        ${para(data.solution)}
+      </div>
+      <div class="modal-section">
+        <p class="section-label">Outcome</p>
+        ${outcomesHtml}
+      </div>
+      <div class="modal-section">
+        <p class="section-label">Lessons learned</p>
+        <div class="lessons"><p>${data.lessons}</p></div>
+      </div>
+      <div class="modal-footer-grid">
+        <div class="col"><p class="section-label">Services</p><div>${servicesHtml}</div></div>
+        <div class="col"><p class="section-label">Stack</p><div>${stackHtml}</div></div>
+      </div>
+    `;
+
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    modal.scrollIntoView({ block: 'start' });
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(el => {
+    el.addEventListener('click', () => openModal(el.dataset.modal));
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
